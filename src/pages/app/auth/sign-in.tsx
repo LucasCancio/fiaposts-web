@@ -61,7 +61,7 @@ export function SignIn() {
 
       <div className="p-8">
         <Button variant="ghost" asChild className="absolute right-8 top-8">
-          <Link to="/sign-up">Novo professor</Link>
+          <Link to="/sign-up">Não tem cadastro?</Link>
         </Button>
 
         <div className="flex w-[350px] flex-col justify-center gap-6">
@@ -70,21 +70,31 @@ export function SignIn() {
               Acessar painel
             </h1>
             <p className="text-sm text-muted-foreground">
-              Acompanhe suas vendas pelo painel do parceiro!
+              Acompanhe os seus posts pelo painel do professor!
             </p>
           </div>
 
           <form className="space-y-4" onSubmit={handleSubmit(handleSignIn)}>
             <div className="space-y-">
               <Label htmlFor="email">Seu e-mail</Label>
-              <Input id="email" type="email" {...register("email")} />
+              <Input
+                id="email"
+                type="email"
+                autoComplete="email"
+                {...register("email")}
+              />
               {errors.email && (
                 <span className="text-red-700">{errors.email.message}</span>
               )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Sua senha</Label>
-              <Input id="password" type="password" {...register("password")} />
+              <Input
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                {...register("password")}
+              />
               {errors.password && (
                 <span className="text-red-700">{errors.password.message}</span>
               )}

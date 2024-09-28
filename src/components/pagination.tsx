@@ -3,9 +3,9 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from 'lucide-react';
+} from "lucide-react";
 
-import { Button } from './ui/button';
+import { Button } from "./ui/button";
 
 export interface IPaginationProps {
   pageIndex: number;
@@ -26,9 +26,9 @@ export function Pagination({
   const isLastPage = pages <= pageIndex + 1;
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between w-full">
       <span className="text-sm text-muted-foreground">
-        Total de {totalCount} item(s)
+        Total de {totalCount} post(s)
       </span>
 
       <div className="flex items-center gap-6 lg:gap-8">

@@ -5,6 +5,7 @@ export function useProfile() {
   return useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
+    retry: 1,
     staleTime: Infinity,
   });
 }

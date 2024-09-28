@@ -6,7 +6,7 @@ export interface IRegisterPostBody {
   content: string;
   slug: string;
   categoriesIds: number[];
-  imageUrl?: string | undefined;
+  imageUrl?: string | undefined | null;
 }
 
 export async function updateOrRegisterPost({

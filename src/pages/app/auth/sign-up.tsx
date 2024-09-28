@@ -74,8 +74,13 @@ export function SignUp() {
 
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="restaurantName">Seu nome</Label>
-              <Input id="name" type="name" {...register("name")} />
+              <Label htmlFor="name">Seu nome</Label>
+              <Input
+                id="name"
+                type="name"
+                autoComplete="name"
+                {...register("name")}
+              />
               {errors.name && (
                 <span className="text-red-700">{errors.name.message}</span>
               )}
@@ -83,15 +88,25 @@ export function SignUp() {
 
             <div className="space-y-2">
               <Label htmlFor="email">Seu e-mail</Label>
-              <Input id="email" type="email" {...register("email")} />
+              <Input
+                id="email"
+                type="email"
+                autoComplete="email"
+                {...register("email")}
+              />
               {errors.email && (
                 <span className="text-red-700">{errors.email.message}</span>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="phone">Sua senha</Label>
-              <Input id="password" type="password" {...register("password")} />
+              <Label htmlFor="password">Sua senha</Label>
+              <Input
+                id="password"
+                type="password"
+                autoComplete="new-password"
+                {...register("password")}
+              />
               {errors.password && (
                 <span className="text-red-700">{errors.password.message}</span>
               )}

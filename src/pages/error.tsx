@@ -1,4 +1,4 @@
-import { Link, useRouteError } from 'react-router-dom';
+import { Link, useRouteError } from "react-router-dom";
 
 export function Error() {
   const error = useRouteError() as Error;
@@ -15,9 +15,9 @@ export function Error() {
         </code>
       </pre>
       <pre className="text-accent-foreground">
-        Voltar para o{' '}
+        Voltar para o{" "}
         <Link to="/" className="text-sky-500 dark:text-sky-400">
-          Dashboard
+          Página principal
         </Link>
       </pre>
     </div>

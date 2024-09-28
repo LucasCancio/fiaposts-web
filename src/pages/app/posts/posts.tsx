@@ -5,23 +5,25 @@ import { z } from "zod";
 
 import { getPosts } from "@/api/posts/get-posts";
 import { PostFilters } from "./post-filters";
+import { Pagination } from "@/components/pagination";
+import { PostCard } from "@/components/post-card";
 
 export function Posts() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = z.coerce.number().parse(searchParams.get("page") ?? "1");
-  const sortBy = searchParams.get("sortBy");
-  const order = searchParams.get("order");
   const title = searchParams.get("title");
   const content = searchParams.get("content");
 
-  const { data: result, isLoading: isLoadingPosts } = useQuery({
-    queryKey: ["posts", page, sortBy, order, title, content],
+  const { data: result } = useQuery({
+    queryKey: ["posts", page, title, content],
+    staleTime: 1000 * 60 * 5,
     queryFn: () =>
       getPosts({
         page,
         title,
         content,
+        perPage: 9,
       }),
   });
 
@@ -37,32 +39,24 @@ export function Posts() {
     <>
       <Helmet title="Posts" />
 
-      <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold tracking-tighter">Posts</h1>
-
-        <div className="space-y-2.5">
+      <div className="flex flex-col gap-4 items-center">
+        <div className="space-y-6 w-full mx-4 px-2">
+          <h2 className="text-2xl font-semibold">Últimos Posts</h2>
           <PostFilters />
-
-          <div className="rounded-md border flex flex-col gap-2">
-            {result?.map((post) => (
-              <a
-                className="hover:border-primary border-2"
-                href={`/post/${post.id}/${post.slug}`}
-                key={post.id}
-              >
-                {post.content}
-              </a>
+          <div className="flex flex-wrap gap-6 justify-center">
+            {result?.posts.map((post) => (
+              <PostCard key={post.id} post={post} />
             ))}
           </div>
 
-          {/*  {result && (
+          {result && (
             <Pagination
               onPageChange={handlePaginate}
-              pageIndex={result.meta.page - 1}
+              pageIndex={result.meta.pageIndex}
               totalCount={result.meta.totalCount}
               perPage={result.meta.perPage}
             />
-          )} */}
+          )}
         </div>
       </div>
     </>
