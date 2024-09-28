@@ -100,7 +100,7 @@ export function SignIn() {
               className="w-full"
               type="button"
             >
-              Voltar
+              Acessar como visitante
             </Button>
           </form>
         </div>

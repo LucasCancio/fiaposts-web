@@ -21,19 +21,6 @@ export function Post() {
       }),
   });
 
-  /*   const { mutateAsync: deletePostFn } = useMutation({
-    mutationFn: deletePost,
-  });
-
-  async function handleDeletePost(postId: number) {
-    try {
-      await deletePostFn({ postId });
-      toast.success("Post excluído com sucesso");
-    } catch (error) {
-      toast.error("Erro ao excluir post");
-    }
-  } */
-
   if (isLoadingPost || !post) {
     return (
       <>

@@ -41,7 +41,6 @@ export function Posts() {
 
       <div className="flex flex-col gap-4 items-center">
         <div className="space-y-6 w-full mx-4 px-2">
-          <h2 className="text-2xl font-semibold">Últimos Posts</h2>
           <PostFilters />
           <div className="flex flex-wrap gap-6 justify-center">
             {result?.posts.map((post) => (
