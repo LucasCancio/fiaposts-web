@@ -40,16 +40,7 @@ export function SignIn() {
   async function handleSignIn(data: ISignInForm) {
     try {
       await authenticate({ email: data.email, password: data.password });
-
       navigate("/");
-      /* toast.success("Enviamos um link de autenticação para seu e-mail.", {
-        action: {
-          label: "Reenviar",
-          onClick: () => {
-            handleSignIn(data);
-          },
-        },
-      }); */
     } catch (error) {
       toast.error("Credenciais inválidas.");
     }
@@ -102,6 +93,14 @@ export function SignIn() {
 
             <Button disabled={isSubmitting} className="w-full" type="submit">
               Acessar
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => navigate("/")}
+              className="w-full"
+              type="button"
+            >
+              Voltar
             </Button>
           </form>
         </div>

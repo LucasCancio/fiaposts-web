@@ -1,17 +1,19 @@
-import { Notebook } from "lucide-react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export function AuthLayout() {
   return (
     <div className="grid min-h-screen grid-cols-2 antialiased">
       <div className="flex h-full flex-col justify-between border-r border-foreground/5 bg-muted p-10 text-muted-foreground">
-        <div className="flex items-center gap-3 text-lg font-medium text-foreground">
-          <Notebook className="h-5 w-5" />
-          <span className="font-semibold">fiaposts</span>
-        </div>
+        <Link
+          to="/"
+          className="flex items-center gap-3 text-lg font-medium text-foreground"
+        >
+          <img src="/logo.png" alt="Fiaposts" className="h-5 w-5" />
+          <span className="font-semibold">Fiaposts</span>
+        </Link>
 
         <footer className="text-sm">
-          Painel do professor &copy; fiaposts - {new Date().getFullYear()}
+          Painel do professor &copy; Fiaposts - {new Date().getFullYear()}
         </footer>
       </div>
 
