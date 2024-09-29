@@ -3,11 +3,9 @@
   Fiaposts 
 </h1>
 
-![Badge](https://img.shields.io/github/license/LucasCancio/fiaposts-web)
-
-<video width="1920" height="800" controls>
-  <source src="docs/apresentacao-fase-3.mp4" type="video/mp4">
-</video>
+<a href="https://www.fiap.com.br/">
+<img alt="Stargazers" src="https://img.shields.io/badge/Fiap-%c1?style=flat&logo=fortran&color=ed145b">
+</a>
 
 No cenário educacional contemporâneo, a integração da tecnologia desempenha um papel fundamental na facilitação do aprendizado e no acesso à informação. Nesse contexto, plataformas online têm emergido como ferramentas essenciais para promover a interação entre educadores e estudantes, estimulando o compartilhamento de conhecimento de forma dinâmica e colaborativa.
 
@@ -43,7 +41,7 @@ Nessa página é possível criar/editar um post, tendo que informar o título, a
 
 <img src="docs/meus-posts.png" width="600">
 
-Nessa página é possivel...
+Nessa página é visualizar todos os posts criados pelo usuário logado. Sendo possivel alterar ou excluir eles.
 
 ## 🛠️ Tecnologias
 
@@ -96,4 +94,8 @@ $ npm run dev
 # O servidor inciará na porta:5173 - acesse <http://localhost:5173>
 ```
 
-##
+## 📝 Licença
+
+Este projeto esta sobe a licença MIT.
+
+Feito com ❤️ por Lucas Cancio
