@@ -11,6 +11,7 @@ import { useProfile } from "@/hooks/use-profile";
 interface IAuthenticationContextType {
   isLoggedIn: boolean | null;
   isLoadingAuthentication: boolean;
+  logoutProfile: () => void;
 }
 
 interface IAuthenticationProviderProps {
@@ -30,6 +31,10 @@ export function AuthenticationProvider({
   const [isLoadingAuthentication, setIsLoadingAuthentication] =
     useState<boolean>(true);
 
+  function logoutProfile() {
+    setIsLoggedIn(false);
+  }
+
   useEffect(() => {
     setIsLoadingAuthentication(isLoadingProfile);
     if (!isLoadingProfile) {
@@ -42,6 +47,7 @@ export function AuthenticationProvider({
       value={{
         isLoggedIn,
         isLoadingAuthentication,
+        logoutProfile,
       }}
     >
       {children}

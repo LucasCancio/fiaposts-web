@@ -1,7 +1,6 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
-import Markdown from "react-markdown";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getPostById } from "@/api/posts/get-post-by-id";
 import { ArrowLeft } from "lucide-react";

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Pencil, Trash } from "lucide-react";
+import { Pencil, Trash, TriangleAlert } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
@@ -10,14 +10,24 @@ import { TPost } from "@/api/posts/get-posts";
 import { deletePost } from "@/api/posts/delete-post";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { useState } from "react";
 
 export interface IPostTableRowProps {
   post: TPost;
 }
 
 export function PostTableRow({ post }: IPostTableRowProps) {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutateAsync: deletePostFn, isPending: isDeletingPost } = useMutation({
     mutationFn: deletePost,
@@ -25,14 +35,22 @@ export function PostTableRow({ post }: IPostTableRowProps) {
 
   async function handleDeletePost() {
     try {
-      deletePostFn({ postId: post.id });
-      toast.success("Post excluído com sucesso");
+      const { status } = await deletePostFn({ postId: post.id });
+      if (status !== 204) {
+        throw new Error("Erro ao excluir post");
+      }
 
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      toast.success("Post excluído com sucesso");
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      await queryClient.invalidateQueries({ queryKey: ["my-posts"] });
     } catch (error) {
       toast.error("Erro ao excluir post");
+    } finally {
+      setIsDeleteDialogOpen(false);
     }
   }
+
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   return (
     <TableRow>
@@ -57,15 +75,48 @@ export function PostTableRow({ post }: IPostTableRowProps) {
         >
           <Pencil className="size-4" />
         </Button>
-        <Button
-          disabled={isDeletingPost}
-          onClick={handleDeletePost}
-          variant="destructive"
-          size="xs"
-          title="Excluir"
-        >
-          <Trash className="size-4" />
-        </Button>
+
+        <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+          <DialogTrigger asChild>
+            <Button
+              disabled={isDeletingPost}
+              variant="destructive"
+              size="xs"
+              title="Excluir"
+            >
+              <Trash className="size-4" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className="flex flex-row">
+                <TriangleAlert className="size-5 mr-2" /> Deseja realmente
+                excluir esse Post?
+              </DialogTitle>
+              <DialogDescription hidden>
+                Deseja realmente excluir esse Post?
+              </DialogDescription>
+            </DialogHeader>
+            <p className="italic">
+              Essa ação é irreversível e excluirá permanentemente o post.
+            </p>
+            <div className="flex gap-2">
+              <Button
+                className="flex-1"
+                type="button"
+                onClick={handleDeletePost}
+                variant="destructive"
+              >
+                Sim
+              </Button>
+              <DialogClose asChild>
+                <Button className="flex-1" type="button" variant="secondary">
+                  Não
+                </Button>
+              </DialogClose>
+            </div>
+          </DialogContent>
+        </Dialog>
       </TableCell>
     </TableRow>
   );

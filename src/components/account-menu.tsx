@@ -17,15 +17,20 @@ import { useProfile } from "@/hooks/use-profile";
 import { useAuthentication } from "@/contexts/authentication-context";
 import { useState } from "react";
 import { logout } from "@/api/auth/logout";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function AccountMenu() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data: profile, isLoading: isLoadingProfile } = useProfile();
-  const { isLoggedIn, isLoadingAuthentication } = useAuthentication();
+  const { isLoggedIn, isLoadingAuthentication, logoutProfile } =
+    useAuthentication();
 
   async function handleSignOut() {
     await logout();
+    logoutProfile();
+    queryClient.invalidateQueries({ queryKey: ["profile"] });
     navigate("/sign-in", { replace: true });
   }
 
