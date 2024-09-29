@@ -1,50 +1,99 @@
-# React + TypeScript + Vite
+<h1 style="display: flex; gap: 1rem;"> 
+  <img src="./docs/logo.png" width="30" alt="Logo" />
+  Fiaposts 
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Badge](https://img.shields.io/github/license/LucasCancio/fiaposts-web)
 
-Currently, two official plugins are available:
+<video width="1920" height="800" controls>
+  <source src="docs/apresentacao-fase-3.mp4" type="video/mp4">
+</video>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+No cenário educacional contemporâneo, a integração da tecnologia desempenha um papel fundamental na facilitação do aprendizado e no acesso à informação. Nesse contexto, plataformas online têm emergido como ferramentas essenciais para promover a interação entre educadores e estudantes, estimulando o compartilhamento de conhecimento de forma dinâmica e colaborativa.
 
-## Expanding the ESLint configuration
+Com o objetivo de promover o compartilhamento de conhecimento, foi criada a plataforma FIAPOSTS, uma plataforma da faculdade FIAP, que disponibiliza uma interface para criação e manipulação de posts educacionais. Desta forma os professores poderão transmitir conhecimento para seus alunos, através de posts.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 💻 Páginas
 
-- Configure the top-level `parserOptions` property like this:
+### Login
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+<img src="docs/login.png" width="600">
+
+Nessa página é possível realizar o login na aplicação, tendo que informar o email e senha, e clicar no botão "Acessar". Caso o usuário não queira entrar como Professor, então ele pode clicar em "Acessar como visitante". Além disso é possível clicar em "Não tem cadastro?" para ser redirecionado para a tela de cadastro de professor.
+
+### Posts (página principal)
+
+<img src="docs/tela-principal.png" width="600">
+
+Nessa página é possível visualizar todos os posts criados (por todos), com paginação e filtro por título.
+
+### Visualização de um Post
+
+<img src="docs/post.png" width="600">
+
+Nessa página é possível visualizar os detalhes de um post, tal como o título, categorias, foto principal, professor autor, data de criação, data de última atualização e conteúdo.
+
+### Cadastro / Edição de um Post
+
+<img src="docs/salvar-post.png" width="600">
+
+Nessa página é possível criar/editar um post, tendo que informar o título, a imagem (como url), o conteúdo (em formato markdown) e as categorias (pelo menos 1 categoria). Nessa tela também é possível pré-visualizar como o post ficará quando for publicado, desta forma é possível visualizar o markdown renderizado antes mesmo de publicar.
+
+### Meus Posts (página adminitrativa)
+
+<img src="docs/meus-posts.png" width="600">
+
+Nessa página é possivel...
+
+## 🛠️ Tecnologias
+
+As seguintes tecnologias foram usadas na construção do projeto:
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [TanStack query](https://tanstack.com/query/latest)
+- [Tailwind](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Docker](https://www.docker.com/)
+
+## Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [Docker](https://www.docker.com/).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+
+### 🎲 Rodando o Back End e o Banco de Dados (servidor)
+
+```bash
+# Clone este repositório
+$ git clone <https://github.com/LucasCancio/fiaposts-api>
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd fiaposts-api
+
+# Monte o container
+$ docker-compose up
+
+# O servidor inciará na porta:3010
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🔧 Instalação
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```bash
+# Clone este repositório
+$ git clone <https://github.com/LucasCancio/fiaposts-web>
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+# Acesse a pasta do projeto no terminal/cmd
+$ cd fiaposts-web
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev
+
+# O servidor inciará na porta:5173 - acesse <http://localhost:5173>
 ```
+
+##
